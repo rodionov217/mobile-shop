@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
+import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import { Homepage } from './components/Homepage';
+import { Catalogue } from './components/Catalogue';
+import { ProductPage } from './components/ProductPage';
+import { Modal } from './components/Modal'
 import './App.css';
 
-function App() {
+import { ApiService } from './service/ApiService';
+import { CartService } from './service/CartService';
+import {ApiServiceContext} from './context/context';
+
+const apiService = new ApiService();
+
+const App = () => {
+  const [showModal, setShowModal] = useState(false);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+    <Modal visible={showModal} hide={() => setShowModal(false)}></Modal>
+      <CartService showModal={() => setShowModal(true)}>
+        <ApiServiceContext.Provider value={apiService}>
+          <Switch>
+            <Route path='/catalogue' component={Catalogue}/>
+            <Route path='/product' render={props => <ProductPage {...props}/>} />
+            <Route path='/' exact component={Homepage}/>
+          </Switch>
+        </ApiServiceContext.Provider>
+      </CartService>
+    </BrowserRouter>
   );
 }
 
