@@ -15,8 +15,8 @@ const apiService = new ApiService();
 const App = () => {
   const [showModal, setShowModal] = useState(false);
   return (
-    <BrowserRouter>
-    <Modal visible={showModal} hide={() => setShowModal(false)}></Modal>
+    <BrowserRouter basename={process.env.PUBLIC_URL+'/'}>
+      <Modal visible={showModal} hide={() => setShowModal(false)}></Modal>
       <CartService showModal={() => setShowModal(true)}>
         <ApiServiceContext.Provider value={apiService}>
           <Switch>
