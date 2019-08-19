@@ -4,7 +4,7 @@ export const ApiContext = React.createContext();
 
 export class ApiService {
   fetchData = async () => {
-    const URL = 'http://www.json-generator.com/api/json/get/cfSynsxYfC';
+    const URL = 'https://www.json-generator.com/api/json/get/cfSynsxYfC';
     const res = await fetch(URL);
     if (!res.ok) {
       throw new Error(`Could not fetch ${URL}, status - ${res.status}`)
