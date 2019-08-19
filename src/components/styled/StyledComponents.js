@@ -11,6 +11,10 @@ Container = styled('div')`
   align-items: ${props => !props.column && 'center'};
   overflow-x: ${props => props.column && 'scroll'};
   overflow-y: ${props => props.column ? 'scroll' : 'hidden'};
+
+  & > img {
+    width: 100%;
+  }
 `;
 
 Section = styled('section')`
@@ -52,7 +56,7 @@ Button = styled('button')`
   padding: 0;
   color: #fff;
   display: ${props => props.inline ? "inlin-block" : "block"};
-  margin: ${props => props.inline ? "20px 0 0 0" : "20px auto"};
+  margin: ${props => props.inline ? "20px 0 0 0" : "20px auto 30px auto"};
   cursor: pointer;
  `;
 
@@ -162,7 +166,7 @@ InputWithIcon = styled('div')`
 ProductCardContainer = styled('div')`
   display: flex;
   flex-direction: ${props => !props.extended ? 'column' : 'row'};
-  justify-content: left;
+  justify-content: ${props => !props.extended ? 'space-between' : 'left'};
   ${props => props.extended ? 'min-width: 310px' : 'width: auto'};
   heigth: 170px;
   background: #FFFFFF;
@@ -170,6 +174,12 @@ ProductCardContainer = styled('div')`
   border-radius: 3px;
   margin-right: 5px;
   min-height: 205px;
+
+  & > div:last-of-type {
+    dixplay: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 `;
 
 ProductCardTitle = styled('h2')`
@@ -177,6 +187,7 @@ ProductCardTitle = styled('h2')`
   font-size: 18px;
   margin-top: ${props => props.extended ? '0.8rem' : '0px'};
   margin-bottom: ${props => props.extended ? '0.8rem' : '0px'};
+  padding-right: 5px;
 `;
 
 ProductCardSubtitle = styled('h3')`
